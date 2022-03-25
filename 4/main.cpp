@@ -14,8 +14,24 @@ int main() {
 }
 
 bool anyPrime(const std::vector<int>& values) {
-    // TODO: return true if any of the values are prime numbers
     auto result = false;
+    for(int x : values){
+        if(x==2) {
+            result = true;
+            break;
+        }
+        while(x != 0 && x%2 != 0){
+            for(int i = 2; i<=x; i++){
+                if(x%i==0){
+                    result = false;
+                }
+                else{
+                    result = true;
+                }
+            }
+
+        }
+    }
 
     return result;
 }
