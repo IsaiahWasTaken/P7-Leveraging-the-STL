@@ -4,6 +4,7 @@
 #include <string>
 #include "Utility.h"
 #include "Car.h"
+using namespace std;
 
 template <typename T>
 class Tag {
@@ -29,10 +30,15 @@ int main() {
     std::cout << "Cars: " << cars << "\n";
 
     std::vector<Tag<Car>> taggedCars;
-    // TODO: populate 'taggedCars' with elements of type Tag<Car> where the tag is set to true
-    //  only if the price < 10,000 or if the vin starts with a letter in A...F
+    for(Car x : cars){
+        if(x.vin()[0] >= 'A' && x.vin()[0] <= 'F' || x.price() < 1000){
+            taggedCars.push_back(Tag<Car>(true, x));
+        }
+        else {taggedCars.push_back(Tag<Car>(false, x));}
+    }
+    partition(taggedCars.begin(),taggedCars.end(),[](Tag<Car>& x){
+        return x.isTagged();
+    });
 
-    // TODO: arrange `taggedCars` so that the elements tagged `true` are at the beginning
-    //  and `false` elements are at the ened
     std::cout << "Tagged Cars: " << taggedCars << "\n";
 }
